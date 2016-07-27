@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Свойства функции </title> 
+<script>
+/*
+Напишите функцию bigToSmall, которая будет принимать один аргумент arr (двухмерный массив). Ваше задание: 1. Привести двухмерный массив к одномерному.
+2. Отсортировать массив в нисходящем порядке. 3. Использовать символ ‘>’ как разделитель при превращении массива в строку.
+
+Например:
+
+  bigToSmall([[1,2],[3,4],[5,6]])  "6>5>4>3>2>1"
+  bigToSmall([[1,3,5],[2,4,6]])  "6>5>4>3>2>1"
+  bigToSmall([[1,1],[1],[1,1]])  "1>1>1>1>1" 
+*/
+
+(function bigToSmall(arr){
+	var res_arr = [];
+	for (var row of arr){
+			for (var value in row){
+				res_arr.push(row[value]);
+			}
+	}
+
+	function numericSort(a, b){
+		if(a>b){
+			return -1;
+		}else{
+			return 1;
+		}
+	}
+	res_arr.sort(numericSort);
+	var str = res_arr.join('>');
+	alert(str);
+})([[1,3,5],[2,4,6]]);
+
+</script>
+</head> 
+	
+<body> 
+
+</body>
+</html>
