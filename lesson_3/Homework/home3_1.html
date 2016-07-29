@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title> 
+<script>
+
+/*
+###Задача 1  
+Напишите функцию sum, которая будет работать как показано в примере ниже: 
+```
+sum(1)(2) == 3; // 1 + 2
+sum(1)(2)(3) == 6; // 1 + 2 + 3
+sum(5)(-1)(2) == 6
+sum(6)(-1)(-2)(-3) == 0
+sum(0)(1)(2)(3)(4)(5) == 15
+```
+Количество скобок может быть любым. 
+*/
+
+
+function sum(b){
+	var res = b;
+	function inner(a){
+		res+=a;
+		return inner;
+	}
+
+	inner.toString = function(){
+		return res;
+	}
+
+	return inner;
+}
+
+alert(sum(1)(2)(3));
+alert(sum(6)(-1)(-2)(-3));
+
+
+</script>
+</head> 
+	
+<body> 
+
+</body>
+</html>

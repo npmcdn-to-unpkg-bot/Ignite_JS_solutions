@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Classwork solution</title> 
+<script>
+/*
+###Задача 3 
+
+Напишите функцию joinArgs, которая выводит свои аргументы, разделенные символом  ‘*’ на экран в виде строки. 
+Используйте прием “одалживания методов”.  У вас должно получиться: 
+```
+joinArgs(1,2,3) // 1*2*3 
+joinArgs(hello, world, !) // hello*world*!
+``` 
+*/
+
+function joinArgs(){
+	// First variant
+	
+	/*var join = [].join;
+	document.write(join.call(arguments, '*'));
+	document.write('<br>');*/
+
+	// Second variant
+
+	arguments.join=[].join;
+	document.write(arguments.join('*'));    
+	document.write('<br>');
+}
+
+joinArgs(1,2,3); // 1*2*3 
+joinArgs('hello', 'world', '!'); // hello*world*!
+
+</script>
+</head> 
+	
+<body> 
+<!--html here-->
+</body>
+</html>

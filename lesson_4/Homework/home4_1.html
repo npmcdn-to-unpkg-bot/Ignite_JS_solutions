@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title> 
+<script>
+/*
+###Задача 1 
+
+Представьте, что в JavaScript нет метода call, есть только метод apply. Используя apply, напишите метод call. 
+``` 
+*/
+
+function call(test, context){
+	
+    arguments.splice=[].splice;
+	return test.apply(context, arguments.splice(2));
+
+}
+
+function test(surname, greetings){
+	return greetings + ', ' + this.name + ' ' + surname + '!';
+
+}
+
+var a = {
+	name: "Vanya"
+}
+document.write(call(test, a, "Ivanov", "Hello"));
+
+</script>
+</head> 
+	
+<body> 
+<!--html here-->
+</body>
+</html>

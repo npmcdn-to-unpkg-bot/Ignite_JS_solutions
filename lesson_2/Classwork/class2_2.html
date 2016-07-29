@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Classwork solution</title> 
+<script>
+/*
+###Задача 2. 
+Напишите функцию, возвращающую количество собственных вызовов.
+*/
+function callFunc(){
+	var numCount = 0;
+	return function(){
+		return ++numCount;
+	}
+	
+}
+
+var test = callFunc();
+test();
+
+alert(test());
+alert(test());
+
+</script>
+</head> 
+	
+<body> 
+
+</body>
+</html>

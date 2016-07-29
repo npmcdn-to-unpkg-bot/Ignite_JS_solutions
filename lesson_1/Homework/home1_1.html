@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title> 
+<script>
+/*
+###Задача 1. 
+Создайте функцию find(arr, value), которая ищет в массиве arr значение value и возвращает его номер, если найдено, или -1, если не найдено. 
+*/
+
+var arr = [1, 2, 3, 'li', 'ol', 4, 5];
+
+function find(arr, value){
+	for(var i=0; i < arr.length; i++){
+		if(arr[i] == value){
+			return i;
+		}
+	}
+	return -1;
+}
+
+alert(find(arr, 4));
+alert(find(arr, 'li'));
+alert(find(arr, 'lol'));
+
+</script>
+</head> 
+	
+<body> 
+<!--html here-->
+</body>
+</html>

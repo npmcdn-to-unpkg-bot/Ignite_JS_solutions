@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Classwork solution</title> 
+<script>
+
+/*###Задача 1 
+Напишите функцию sumArgs, которая суммирует все свои аргументы. При решении задачи используйте метод call или apply. 
+*/
+
+function sumArgs(){
+	return [].reduce.call(arguments, function(val1, val2){
+		return val1 + val2;
+	});
+}
+
+alert(sumArgs(1, 3, 5));
+
+</script>
+</head> 
+	
+<body> 
+<!--html here-->
+</body>
+</html>

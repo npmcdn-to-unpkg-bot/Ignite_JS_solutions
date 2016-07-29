@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Classwork solution</title> 
+<script>
+/*
+Перепишите с использованием встроенного метода bind: 
+```
+function bind(func, context) {
+  return function() {
+    return func.apply(context, arguments);
+  };
+}
+
+var user = {
+  firstName: "Вася",
+  sayHi: function() {
+    alert( this.firstName );
+  }
+}; 
+
+var f = bind(user.sayHi, user);  
+f(); 
+``` 
+*/
+
+var user = {
+  firstName: "Вася",
+  sayHi: function() {
+    alert( this.firstName );
+  }
+}; 
+
+var f = user.sayHi.bind(user);
+f(); 
+
+</script>
+</head> 
+	
+<body> 
+<!--html here-->
+</body>
+</html>
