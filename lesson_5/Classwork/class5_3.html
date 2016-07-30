@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Classwork solution</title> 
+<script>
+
+/*
+###Задача 3
+Напишите функцию, которая принимает один аргумент и возвращает его тип данных. 
+Выполните обработку исключений в случае передачи двух и больше аргументов.
+*/
+
+function whatType(val) {
+	
+	try{
+		var err = new Error('Too many arguments!');
+		if(arguments[1]) throw err;
+	}
+	catch(e){
+		return e;
+	}
+
+	return typeof val;
+
+}
+
+alert(whatType(5, 6));
+
+</script>
+</head> 
+<body> 
+<!--html here-->
+</body>
+</html>
