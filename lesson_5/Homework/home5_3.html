@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title> 
+</head> 
+<body> 
+<!--html here-->
+<div id="timer"></div>
+<script>
+/*
+### Задача 3 
+
+Сделайте таймер обратного отсчета, который выполняет обратный отсчет от зданого числа до нуля. 
+Когда доходит до нуля - выводит сообщение о том, что отсчет закончен.
+
+Например, var timer=10, каждую секунду на странице меняется числа - 10, 9, 8... и так далее до нуля.
+*/
+var timer = 10;
+
+var timerDiv = document.getElementById("timer");
+timerDiv.innerHTML = timer;
+
+(function printSecond(){ 
+	var clock = setInterval(function(){ 
+			//document.write(--timer + '<br>');
+			timerDiv.innerHTML = --timer;
+			if(timer == 0){
+				clearInterval(clock);
+				alert('Отсчет закончен!');
+			}
+	}, 1000);
+})();
+
+</script>
+</body>
+</html>
