@@ -13,8 +13,8 @@
 
 function call(test, context){
 	
-    arguments.splice=[].splice;
-	return test.apply(context, arguments.splice(2));
+    arguments.slice=[].slice;
+	return test.apply(context, arguments.slice(2));
 
 }
 
