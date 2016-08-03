@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title> 
+<script>
+/*
+###Задача 3 
+Метод elem.closest(css) для поиска ближайшего родителя, удовлетворяющего селектору css, не поддерживается некоторыми браузерами, например IE11-.
+Создайте для него полифилл.
+*/
+window.onload = function() {
+
+  if (!Element.prototype.closest){
+    Element.prototype.closest = function(css) {
+      var node = this;
+      var parNode = node.parentNode;
+      var found=false;
+      var match = undefined;
+      while(!found || parNode == null){
+        
+        if(parNode.querySelector(css) == null)
+          parNode = parNode.parentNode;
+        else{
+           match= parNode.querySelector(css);
+          found = true;
+        }
+      }
+      return match;
+    }
+  
+  }
+var elements = document.getElementsByTagName('ul'); 
+alert(elements[0].closest('body .t'));
+elements[0].closest('body .t').style.backgroundColor = 'red'; 
+
+}
+
+</script>
+</head> 
+<body> 
+<!--html here-->
+<div class="t"> 
+    <h1>Heading 1</h1>
+ 
+    <ul>
+      <li>List Item 1</li> 
+      <li>List Item 2</li>
+    </ul>
+ 
+</div> 
+<div>
+      <h1>Heading 2</h1>
+    <ol>
+      <li>List Item 1</li> 
+      <li>List Item 2</li>
+    </ol>
+  
+</div>
+</body>
+</html>
