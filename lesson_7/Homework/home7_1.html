@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title>
+<style>
+        #div1 {
+            background-color: red;
+        }
+
+        #div2 {
+            background-color: green;
+        }
+
+        #div3 {
+            background-color: yellow;
+        }
+        .div {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+        }
+</style>
+<script>
+/*
+###Задача 1. 
+
+Создайте страницу с 3 элементами div. Напишите сценарий, который будет произвольно менять положение этиъ элементов на странице каждую секунду. Работа со стилем!!!
+*/
+</script>
+</head> 
+<body> 
+<div id="div1" class = 'div'>Div 1</div>
+<div id="div2" class = 'div'>Div 2</div>
+<div id="div3" class = 'div'>Div 3</div>
+<script>
+var timer = setInterval(styleChange, 1000);
+
+function styleChange(){
+  var divs = document.getElementsByTagName('div');
+  for (div of divs){
+    var left = Math.random()*1200;
+    var top = Math.random()*600;
+    div.setAttribute( 'style','position: absolute; left: '+left+'px; top : '+top+'px;');
+  }
+}
+</script>
+</body>
+</html>
