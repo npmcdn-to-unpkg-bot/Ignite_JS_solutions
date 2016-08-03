@@ -12,9 +12,9 @@
 */
 
 function call(test, context){
-	
-    arguments.slice=[].slice;
-	return test.apply(context, arguments.slice(2));
+	var arr = [...arguments];
+   
+	return test.apply(context, arr.slice(2));
 
 }
 
