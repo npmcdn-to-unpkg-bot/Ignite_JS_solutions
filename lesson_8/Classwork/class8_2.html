@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Classwork solution</title> 
+<script>
+/*
+###Задача 2.  
+
+Создайте страницу. Разместите на странице поле ввода, кнопку и пустой div.  
+Создайте сценарий, который при нажатии на кнопку будет записывать содержимое поля ввода в пустой div. 
+*/
+</script>
+</head> 
+<body>
+
+<input id ='inpfield' type="text" placeholder="Enter text here" name="name">
+<button id = 'btn'>Add text into container</button>
+<div id = 'content'></div>
+  
+  <script>
+  window.onload = function () {
+
+  var div = document.getElementById('content');
+  var btn = document.getElementById('btn');
+  var inpt = document.getElementById('inpfield');
+
+  btn.onclick = function () {
+    div.innerHTML = inpt.value;
+  }
+}
+  </script>
+</body>
+</html>
