@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title>
+<script>
+/*
+###Задача 1. 
+
+Создайте регистрационную форму:  логин, пароль, телефон и кнопка "Отправить".
+По нажатию на кнопку "Отправить", проверьте корректность ввода данных с помощью JavaScript.
+1) Логин - не должен содержать цифры.
+2) Пароль - не дожен содержать знак $.
+3) Телефон - должен содержать только цифры.
+
+Закрасьте фон поля ввода в красный цвет, если были введены неправильные данные.
+
+Используйте для решение данной задачи методы для работы со строками или регулярные выражения: 
+[link](https://learn.javascript.ru/regexp-introduction) 
+*/
+window.onload = function () {
+    var btn = document.getElementById("btn");
+    btn.onclick = function () {
+        
+        var inputs = document.getElementsByTagName('input');
+        var log = inputs[0];
+        var pass = inputs[1];
+        var tel = inputs[2];
+
+        //alert(log.value);
+        
+        (log.value.search(/[0-9]/)>=0) ? log.setAttribute( 'style','background-color: red') : log.setAttribute( 'style','background-color: white');
+
+        (pass.value.search(/\$/)>=0) ? pass.setAttribute( 'style','background-color: red') : pass.setAttribute( 'style','background-color: white');
+
+        (tel.value.search(/[a-zA-Z]/)>=0) ? tel.setAttribute( 'style','background-color: red') : tel.setAttribute( 'style','background-color: white');
+        //alert('Wrong input data!');
+    }
+}
+</script>
+</head> 
+<body> 
+<form>
+    <span>Логин : </span><input id="log" type="text" value="fi17fa"/><br>
+    <span>Пароль : </span><input id="pass" type="text" value="bng$hk"/><br>
+    <span>Телефон : </span><input id="tel" type="text" value="3453dssdfs4554"/><br>
+</form>
+<button id = "btn">Отправить</button>
+</body>
+</html>

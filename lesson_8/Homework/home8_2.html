@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title>
+<style>
+    #cont{
+        display: block;
+        height: 40px;
+    }
+</style>
+<script>
+/*
+###Задача 2.  
+
+При наведении мыши на элемент, на нём возникает событие mouseover, при удалении мыши с элемента – событие mouseout.
+Зная это, напишите JS-код, который будет делать так, что при наведении на элемент, если у него есть атрибут data-tooltip – над ним будет показываться подсказка с содержимым этого атрибута.
+Например, две кнопки: 
+```
+<button data-tooltip="подсказка длиннее, чем элемент">Короткая кнопка</button>
+<button data-tooltip="HTML<br>подсказка">Ещё кнопка</button>
+*/
+window.onload = function () {
+
+    var span = document.getElementById('cont');
+
+    document.addEventListener('mouseover', function (event) {
+        var target = event.target;
+        var id = target.getAttribute('data-tooltip');
+        if (!id) return;
+        span.innerHTML = id;
+
+    });
+
+    document.addEventListener('mouseout', function (event) {
+        var target = event.target;
+        span.innerHTML = '';
+
+    });
+}
+</script>
+</head> 
+<body>
+<span id='cont'></span>
+<button data-tooltip="подсказка длиннее, чем элемент">Короткая кнопка</button>
+<button data-tooltip="HTML<br>подсказка">Ещё кнопка</button>
+</body>
+</html>

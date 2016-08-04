@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title> 
+<script>
+/*
+###Задача 3.  
+
+Создайте страницу-калькулятор. 
+Разместите на странице два поля ввода и кнопки для арифметических операций над 
+данными введенными в поля ввода. Реализуйте данную страницу двумя способами – с использованием модели DOM Level 0 (через атрибуты) и DOM Level 2. 
+*/
+</script>
+</head> 
+<body>
+<h3>Calculator</h3>
+<hr>
+<input id ='val1' type="text" placeholder="Enter first value" name="name"><br>
+<hr>
+<button id = 'plus'> + </button>
+<button id = 'minus'> - </button>
+<button id = 'multiply'> * </button>
+<button id = 'divide'> / </button><span> Click on button to get result</span><br>
+<hr>
+<input id ='val2' type="text" placeholder="Enter second value" name="name"><br>
+<hr>
+<div id = 'content' style = 'height: 23px'></div>
+<hr>
+  
+  <script>
+  window.onload = function () {
+
+  var div = document.getElementById('content');
+
+  var plus = document.getElementById('plus');
+  var minus = document.getElementById('minus');
+  var multiply = document.getElementById('multiply');
+  var divide = document.getElementById('divide');
+
+  var val1 = document.getElementById('val1');
+  var val2 = document.getElementById('val2');
+
+  plus.addEventListener('click', function () {
+  	if(validator()) div.innerHTML = (+val1.value) + (+val2.value);
+    });
+  minus.addEventListener('click', function () {
+  	if(validator()) div.innerHTML = (+val1.value) - (+val2.value);
+    });
+  multiply.addEventListener('click', function () {
+  	if(validator()) div.innerHTML = (+val1.value) * (+val2.value);
+    });
+  divide.addEventListener('click', function () {
+  	if(val2.value === '0'){
+	  	alert('Dividing on zero is deprecated!!!');
+	  	return false;
+	  	}	
+	if(validator()) div.innerHTML = (+val1.value) / (+val2.value);
+    });
+
+	  function validator(){
+	  	if ( val1.value.search(/[0-9]/) == -1 || val2.value.search(/[0-9]/) == -1){ 
+	  		alert('WRONG ARGUMENTS!!!'); 
+	  		return false;
+	  	}
+	  	return true;
+	  }
+}
+  </script>
+</body>
+</html>
