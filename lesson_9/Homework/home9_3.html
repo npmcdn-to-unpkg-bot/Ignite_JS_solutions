@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title> 
+<script>
+/*
+###Задача 3.  
+Создайте страницу с двумя полями ввода, кнопкой и элементом div с шириной и высотой 50px. 
+Создайте сценарий, который по нажатию на кнопку будет перемещать div в координаты, указанные в полях ввода. 
+В случае, если при нажатии кнопки хотя бы одно из полей ввода не заполнено, пользователь должен получить предупреждение, 
+а событие click должно быть отменено.
+*/
+</script>
+<style>
+	#content{
+		width: 50px;
+		height: 50px;
+		background-color: cyan;
+	}
+</style>
+</head> 
+<body>
+
+<input id ='x_coord' type="text" placeholder="Enter position from the left" name="name">
+<input id ='y_coord' type="text" placeholder="Enter position from the top" name="name">
+<button id = 'btn'>Press to move div</button>
+<div id = 'content'></div>
+  
+  <script>
+  window.onload = function () {
+
+  var div = document.getElementById('content');
+  var btn = document.getElementById('btn');
+  var x_coord = document.getElementById('x_coord');
+  var y_coord = document.getElementById('y_coord');
+
+  btn.onclick = function () {
+  	if(x_coord.value == '' || y_coord.value == '') {
+  		alert('Need both x and y coordinates!!!'); 
+  		return false;
+  	}else{
+    div.style.position = 'absolute';
+    div.style.left = x_coord.value+'px';
+    div.style.top = y_coord.value+'px';
+    }
+  }
+}
+  </script>
+</body>
+</html>

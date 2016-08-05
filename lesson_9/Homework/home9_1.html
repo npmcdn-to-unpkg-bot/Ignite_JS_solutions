@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title> 
+<script>
+/*
+###Задача 1. 
+Сделайте список, элементы которого можно выделять кликом.
+Используйте для решения данной задачи свойство e.target.
+*/
+</script>
+</head> 
+<body>
+
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 3</li>
+<li>Item 4</li>
+<li>Item 5</li>
+</ul>
+  
+  <script>
+  window.onload = function () {
+    document.addEventListener('click', function(e) {
+      if (e.target.style.backgroundColor == 'grey') e.target.style.backgroundColor = 'white';
+      else if(e.target.tagName == 'LI') e.target.style.backgroundColor = 'grey';
+    })
+}
+  </script>
+</body>
+</html>

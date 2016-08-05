@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title> 
+<script>
+/*
+###Задача 2.  
+Создайте круг красного цвета с надписью "Скидка". Когда курсор пользователя будет приближаться к ней, "Скидка" должна от него "убегать", не давая пользователю нажать на красный круг. 
+Если круг выйдет за одну из сторон экрана, то он должен, появится с противоположной стороны.
+*/
+</script>
+<style>
+        #ball {
+            border-radius: 50%;
+            background-color: red;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 600px;
+            top: 200px;
+        }
+        #sale{
+        	color: yellow;
+        	display: inline-block;
+        	padding-left: 30px;
+        	padding-top: 40px;
+        }
+</style>
+</head> 
+<body>
+
+<div id="ball"><span id = 'sale'>SALE</span></div>
+
+<div id="div2"></div>
+  
+  <script>
+  window.onload = function () {
+  	
+  	var ball = document.getElementById('ball');
+  	var r = 50;
+  	var cHeight = document.documentElement.clientHeight;
+    var cWidth = document.documentElement.clientWidth;
+
+    document.addEventListener('mousemove', function(e) {
+
+      var ball_pos = ball.getBoundingClientRect();
+      var ball_x = ball_pos.left + 50;
+      var ball_y = ball_pos.top + 50;
+
+      //If distance beetwen cursor and div less then constant, then move
+      if ( Math.sqrt((e.offsetX-ball_x)*(e.offsetX-ball_x)+(e.offsetY-ball_y)*(e.offsetY-ball_y)) < 80){
+      	//Boundaries
+      	if( ball_x >= cWidth - r){
+      		ball.style.left = r/10 +'px';
+      	}
+      	if( ball_x <= r){
+      		ball.style.left = (cWidth - 2*r) +'px';
+      	}
+      	if( ball_y >= cHeight - r){
+      		ball.style.top = r/10 +'px';
+      	}
+      	if( ball_y <= r){
+      		ball.style.top = (cHeight - 2*r) +'px';
+      	}
+
+      	//Cases for div movement
+      	if(e.offsetX < ball_x){
+      		ball.style.left = (ball.offsetLeft + 10) +'px';
+      	}
+      	if(e.offsetX > ball_x){
+      		ball.style.left = (ball.offsetLeft - 10) +'px';
+      	}
+      	if(e.offsetY < ball_y){
+      		ball.style.top = (ball.offsetTop + 10) +'px';
+      	}
+      	if(e.offsetY  > ball_y){
+      		ball.style.top = (ball.offsetTop - 10) +'px';
+      	}
+
+      }
+
+      //console.log(ball_pos.left, ball_pos.top);
+      //console.log(e.offsetX, e.offsetY);
+
+
+    })
+
+    /*var div2 = document.getElementById("div2");
+    document.onmousemove = function (e) {
+    	div2.innerHTML = "Событие onmouse<b>move</b> X:" + e.offsetX + " Y:" + e.offsetY;
+    }*/
+
+   }
+
+  </script>
+</body>
+</html>
