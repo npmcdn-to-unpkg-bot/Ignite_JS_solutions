@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title> 
+<script>
+/*
+###Задача 1. 
+
+Создайте две HTML страницы с разным контентом. Создайте страницу, в которой находиться сценарий загружающий и отображающий контент двух этих страниц при нажатии на кнопку. 
+Контент должен загружаться асинхронно.
+*/
+</script>
+</head> 
+<body>
+
+<button id = 'btn'>Load content</button>
+<div id = 'content1'></div>
+<div id = 'content2'></div>
+  
+  <script>
+  window.onload = function () {
+
+  var div1 = document.getElementById('content1');
+  var div2 = document.getElementById('content2');
+  var btn = document.getElementById('btn');
+
+  btn.onclick = function () {
+  	var req1 = new XMLHttpRequest();
+    var req2 = new XMLHttpRequest();
+
+
+  	req1.open("GET", 'first_page.html');
+    req2.open("GET", 'second_page.html');
+  	
+  	req1.onreadystatechange = function () {
+	  	if (req1.readyState == 4) { // если получен ответ
+	        if (req1.status == 200) { // и если статус код ответа 200
+	            div1.innerHTML = req1.responseText;
+	        }
+	    }
+	}
+
+  req2.onreadystatechange = function () {
+      if (req2.readyState == 4) { // если получен ответ
+          if (req2.status == 200) { // и если статус код ответа 200
+             div2.innerHTML = req2.responseText;
+          }
+      }
+  }
+
+  req1.send();
+  req2.send();
+ 
+  }
+}
+  </script>
+</body>
+</html>

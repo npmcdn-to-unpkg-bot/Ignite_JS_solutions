@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Homework solution</title> 
+<script>
+/*
+###Задача 3. 
+
+Разработайте страницу с двумя полями ввода и кнопкой. Пользователь должен вводить в поля ввода целочисленный значения, а нажатие по кнопке должно приводить к 
+асинхронному запросу на сервер. Запрашивать следует обработчик CalcHandler.ashx, который находиться вместе с задачей в папке Homework, обработчик принимает два post параметра с именами ‘a’ и ‘b'. 
+Результат который возвращает обработчик выведите на страницу (рекомендуется выполнять задачу в Visual Studio).
+*/
+</script>
+</head> 
+<body>
+
+<hr>
+<input id ='val1' type="text" placeholder="Enter first value" name="name"><br>
+<hr>
+<button id = 'plus'> + </button><br>
+<hr>
+<input id ='val2' type="text" placeholder="Enter second value" name="name"><br>
+<hr>
+<div id = 'content' style = 'height: 23px'></div>
+<hr>
+  
+<script>
+window.onload = function () {
+
+  var div = document.getElementById('content');
+  var plus = document.getElementById('plus');
+  
+    plus.onclick = function () {
+
+      var val1 = document.getElementById('val1').value;
+      var val2 = document.getElementById('val2').value;
+      
+      function validator(){
+
+        if ( val1.search(/[0-9]/) == -1 || val2.search(/[0-9]/) == -1){ 
+          alert('WRONG ARGUMENTS!!!'); 
+          return false;
+        }
+        return true;
+      }
+
+      if(validator()) {
+        
+        var xhr = new XMLHttpRequest(); 
+        xhr.open('POST','CalcHandler.ashx'); 
+
+       // Content-Type - HTTP заголовок, который указывает серверу, как интерпретировать тело запроса.
+       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+       // отправка запроса с указанием данных.  
+       xhr.send('a=' + val1 + '&b=' + val2);
+
+       xhr.onload = function() {  
+        div.innerHTML = xhr.responseText; 
+      }
+    } 
+  }
+}
+
+</script>
+</body>
+</html>
