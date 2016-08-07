@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta charset="utf-8">
+<title>Classwork solution</title> 
+<script>
+/*
+###Задача 1. 
+
+Создайте страницу с кнопкой.
+Создайте код, который загрузит на страницу картинку img.jpg (файл находитя в папке classwork) асинхронно через секунду после загрузки страницы.
+*/
+</script>
+</head> 
+<body>
+
+<button id = 'btn'>Add image into container</button>
+<div id = 'content'></div>
+  
+  <script>
+  window.onload = function () {
+
+  var div = document.getElementById('content');
+  var btn = document.getElementById('btn');
+
+  btn.onclick = function () {
+  	var xhr = new XMLHttpRequest();
+
+  	var path = "img.jpg";
+
+  	xhr.open("GET", path);
+  	xhr.send();
+
+  	xhr.onreadystatechange = function () {
+	  	if (xhr.readyState == 4) { // если получен ответ
+	        if (xhr.status == 200) { // и если статус код ответа 200
+	            setTimeout(function() { div.innerHTML = '<img src = ' + path+ '>'; }, 1000);
+	        }
+	    }
+	}
+ 
+  }
+}
+  </script>
+</body>
+</html>
