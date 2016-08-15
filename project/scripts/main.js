@@ -213,8 +213,9 @@ drawDiagrams(canvas[3], deadshot.photography);
 	var clients_count = 1600, projects_count = 3200, awards_count = 40, coffee_count = 20000;
 	var stat_values = document.querySelectorAll('.statistics h1');
 	var targ_elem = stat_values[0];
-	var startY = targ_elem.getBoundingClientRect().bottom + window.pageYOffset;
-
+	var startYBot = targ_elem.getBoundingClientRect().bottom + window.pageYOffset;
+	var startYTop = targ_elem.getBoundingClientRect().top + window.pageYOffset;
+	var scrolled1 = false;
 
 	function tick(from, to, duration) {
 	    if (from > to) {
@@ -243,12 +244,23 @@ var scrolled = false;
 	window.onscroll = function () {
 	
 		//STATISTICS SCROLL
-	   if (window.pageYOffset < startY) {
-        tick.bind(stat_values[0])(0, clients_count, 3000);
-        tick.bind(stat_values[1])(0, projects_count, 3000);
-        tick.bind(stat_values[2])(0, awards_count, 3000);
-        tick.bind(stat_values[3])(0, coffee_count, 3000);
-      	} 
+		  	
+      	var cH = document.documentElement.clientHeight;
+    	var pageY = window.pageYOffset;
+
+      	if(cH + pageY > startYBot && !scrolled1){
+      		tick.bind(stat_values[0])(0, clients_count, 3000);
+	        tick.bind(stat_values[1])(0, projects_count, 3000);
+	        tick.bind(stat_values[2])(0, awards_count, 3000);
+	        tick.bind(stat_values[3])(0, coffee_count, 3000);
+	        scrolled1 = true;
+      	}else if(pageY > startYBot){
+      		scrolled1 = false;
+      	}else if(pageY < startYBot - cH){
+      		scrolled1 = false;
+      	}
+
+
 
       	//CLIENTS SLIDER SCROLL
       	if (window.pageYOffset < startYy && !scrolled) {
