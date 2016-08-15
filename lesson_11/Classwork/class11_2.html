@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="helloWorldApp">
+<head>
+    <title>Classwork solution</title>
+    <script src="angular.js"></script>
+    <script>
+    /*
+    ###Задача2
+    Создайте страницу с полем ввода и кнопкой. При нажатии на кнопку содержимое поля ввода должно отображаться на странице. 
+    */
+        
+        var helloWorldApp = angular.module("helloWorldApp", []);
+
+        // Контроллер
+
+        helloWorldApp.controller("HelloWorldCtrl", function ($scope) {
+
+	        // Поведение / Behavior
+            $scope.clickHandler = function () {
+                $scope.message = $scope.text;
+            }
+
+        });
+
+    </script>
+</head>
+
+<body ng-controller="HelloWorldCtrl">
+    <h1>{{message}}</h1>
+    <!--ng-model - указывает что поле ввода связанно со свойство $scope.text-->
+    <input ng-model="text"/>
+    <!--ng-click - определяет обработчик события click-->
+    <button ng-click="clickHandler()">Обновить</button>
+</body>
+</html>
