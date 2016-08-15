@@ -286,7 +286,7 @@ return function(){
 	var slogan = document.getElementById("slogan");
 
 	var slogans = ['BRANDING HAVE ANOTHER DEFINITION 1', 'BRANDING HAVE ANOTHER DEFINITION 2', 'BRANDING HAVE ANOTHER DEFINITION 3'];
-	var photos = ['1.jpg', '2.jpg', '3.jpg'];
+	var photos = ['1.JPG', '2.JPG', '3.JPG'];
 	var index = 0;
 
 	function prevSlide(){
