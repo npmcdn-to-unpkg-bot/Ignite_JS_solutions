@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html ng-app="ToDoListApp">
+<head>
+    <title>Classwork solution</title>
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <link href="../Libraries/bootstrap-theme.css" rel="stylesheet" />
+    <script>
+    /*
+    ###Задача 2
+    Используйте таблицу с данными массива items из предыдущей задачи. Реализуйте следующее:
+
+    * Добавьте на страницу 5 элементов checkbox с именами свойств элементов массива items(name, price и т.д.)
+    * Нажатие на каждый из checkbox скрывает/отображает соответствующее свойство элементов массива items в таблице 
+    * Используйте директиву ng-switch 
+
+    ###Задача 3 
+    Перепишите код предыдущей задачи с использованием директивы ng-include
+    */
+
+        // Модуль
+
+        var ToDoListApp = angular.module("ToDoListApp", []);
+
+        // Контроллер
+
+        ToDoListApp.controller("ToDoListCtrl", function ($scope) {
+
+            $scope.items = [
+                 { name: "B Item", price: 10.9, category: "Category 1", count: 10, tax: 1.12, expiration: 10 },
+                 { name: "A Item", price: 1.1, category: "Category 1", count: 8, tax: 0.55, expiration: 12 },
+                 { name: "D Item", price: 2.6, category: "Category 2", count: 7, tax: 0.22, expiration: 5 },
+                 { name: "C Item", price: 17.5, category: "Category 2", count: 33, tax: 2.77, expiration: 10 }];
+
+            $scope.name = true;
+            $scope.price = true;
+            $scope.category = true;
+            $scope.count = true;
+            $scope.tax = true;
+
+            $scope.name_url = 'includes/name.html'
+            $scope.price_url = 'includes/price.html'
+            $scope.category_url = 'includes/category.html'
+            $scope.count_url = 'includes/count.html'
+            $scope.tax_url = 'includes/tax.html'
+
+            $scope.changeView = function () {
+                if($scope.name){$scope.name_url = 'includes/name.html'}
+                else{$scope.name_url = ''}
+
+                if($scope.price){$scope.price_url = 'includes/price.html'}
+                else{$scope.price_url = ''}
+
+                if($scope.category){$scope.category_url = 'includes/category.html'}
+                else{$scope.category_url = ''}
+
+                if($scope.count){$scope.count_url = 'includes/count.html'}
+                else{$scope.count_url = ''}
+
+                if($scope.tax){$scope.tax_url = 'includes/tax.html'}
+                else{$scope.tax_url = ''}
+            }
+
+            
+
+        });  
+
+    </script>
+
+</head>
+<body ng-controller="ToDoListCtrl">
+
+    <div class="container">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>price</th>
+                    <th>category</th>
+                    <th>count</th>
+                    <th>tax</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="item in items">
+                
+                <!--<td ng-include src="'includes/name.html'"></td>-->
+
+                <td><ng-include src="name_url"></ng-include></td>
+                <td><ng-include src="price_url"></ng-include></td>
+                <td><ng-include src="category_url"></ng-include></td>
+                <td><ng-include src="count_url"></ng-include></td>
+                <td><ng-include src="tax_url"></ng-include></td>
+
+            </tr>
+        </table>
+
+
+        <div>
+            <!-- Форма -->
+            <form class="form-horizontal">
+              <fieldset>
+
+                <div class="form-group">
+                  
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="name" ng-click="changeView()"> name
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="price" ng-click="changeView()"> price
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="category" ng-click="changeView()"> category
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="count" ng-click="changeView()"> count
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="tax" ng-click="changeView()"> tax
+                      </label>
+                    </div>
+
+                </div>
+              <fieldset> 
+            </form>
+
+        </div>
+
+    </div>
+</body>
+</html>

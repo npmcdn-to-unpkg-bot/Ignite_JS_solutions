@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="ToDoListApp">
+<head>
+    <title>Classwork solution</title>
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <link href="../Libraries/bootstrap-theme.css" rel="stylesheet" />
+    <script>
+    /*
+    ###Задача 2
+    Используйте таблицу с данными массива items из предыдущей задачи. Реализуйте следующее:
+
+    * Добавьте на страницу 5 элементов checkbox с именами свойств элементов массива items(name, price и т.д.)
+    * Нажатие на каждый из checkbox скрывает/отображает соответствующее свойство элементов массива items в таблице 
+    * Используйте директиву ng-switch 
+    */
+
+        // Модуль
+
+        var ToDoListApp = angular.module("ToDoListApp", []);
+
+        // Контроллер
+
+        ToDoListApp.controller("ToDoListCtrl", function ($scope) {
+
+            $scope.items = [
+                 { name: "B Item", price: 10.9, category: "Category 1", count: 10, tax: 1.12, expiration: 10 },
+                 { name: "A Item", price: 1.1, category: "Category 1", count: 8, tax: 0.55, expiration: 12 },
+                 { name: "D Item", price: 2.6, category: "Category 2", count: 7, tax: 0.22, expiration: 5 },
+                 { name: "C Item", price: 17.5, category: "Category 2", count: 33, tax: 2.77, expiration: 10 }];
+
+            $scope.name = true;
+            $scope.price = true;
+            $scope.category = true;
+            $scope.count = true;
+            $scope.tax = true;
+
+        });  
+
+    </script>
+
+</head>
+<body ng-controller="ToDoListCtrl">
+
+    <div class="container">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>price</th>
+                    <th>category</th>
+                    <th>count</th>
+                    <th>tax</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="item in items">
+                <td ng-switch on = 'name'><span ng-switch-when="true">{{item.name}}</span></td>
+                <td ng-switch on = 'price'><span ng-switch-when="true">{{item.price}}</span></td>
+                <td ng-switch on = 'category'><span ng-switch-when="true">{{item.category}}</span></td>
+                <td ng-switch on = 'count'><span ng-switch-when="true">{{item.count}}</span></td>
+                <td ng-switch on = 'tax'><span ng-switch-when="true">{{item.tax}}</span></td>
+            </tr>
+        </table>
+
+        <div>
+            <!-- Форма -->
+            <form class="form-horizontal">
+              <fieldset>
+
+                <div class="form-group">
+                  
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="name"> name
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="price"> price
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="category"> category
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="count"> count
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="tax"> tax
+                      </label>
+                    </div>
+
+                </div>
+              <fieldset> 
+            </form>
+
+        </div>
+
+    </div>
+</body>
+</html>
