@@ -1,0 +1,23 @@
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Count</th>
+            <th>Tax</th>
+            <th>Expiration</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in items">
+
+            <td>{{item.name}} </td>
+            <td>{{item.price}} </td>
+            <td>{{item.category}} </td>
+            <td>{{item.count}} </td>
+            <td>{{item.tax}} </td>
+            <td>{{item.expiration}} </td>
+        </tr>
+    <tbody>
+</table>

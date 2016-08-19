@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <title>Homework solution</title>
+
+    <!--
+        ###Задача 2 
+        Дано массив items: 
+        ```
+             $scope.items = [
+                     { name: "B Item", price: 10.9, category: "Category 1", count: 10, tax: 1.12, expiration: 10 },
+                     { name: "A Item", price: 1.1, category: "Category 1", count: 8, tax: 0.55, expiration: 12 },
+                     { name: "D Item", price: 2.6, category: "Category 2", count: 7, tax: 0.22, expiration: 5 },
+                     { name: "C Item", price: 17.5, category: "Category 2", count: 33, tax: 2.77, expiration: 10 }];
+        ``` 
+        Создайте страницу с элементом select. Реализуйте следующее: 
+        В зависимости от выбранного варианта в списке select, на экране отображаются данные массива или в виде таблицы, или в виде списка 
+    -->
+    <style>
+        body {
+            padding: 30px;
+        }
+
+        ul {
+            margin-left: -40px;
+        }
+    </style>
+    <script>
+
+        var app = angular.module('myApp', [])
+        .controller('mainCtrl', function ($scope) {
+            
+            $scope.options = [{ display: 'Таблица', value: 'table' }, { display: 'Список', value: 'list' }];
+
+            $scope.items = [
+                     { name: "B Item", price: 10.9, category: "Category 1", count: 10, tax: 1.12, expiration: 10 },
+                     { name: "A Item", price: 1.1, category: "Category 1", count: 8, tax: 0.55, expiration: 12 },
+                     { name: "D Item", price: 2.6, category: "Category 2", count: 7, tax: 0.22, expiration: 5 },
+                     { name: "C Item", price: 17.5, category: "Category 2", count: 33, tax: 2.77, expiration: 10 }];
+
+            $scope.mode = $scope.options[0];
+            $scope.url = 'files/table.html';
+
+            $scope.changeView = function () {
+                if ($scope.mode.value == 'table') {
+                    $scope.url = "files/table.html"
+                }
+                else if ($scope.mode.value == 'list') {
+                    $scope.url = "files/list.html"
+                }
+            }
+
+        })
+
+    </script>
+</head>
+<body ng-controller="mainCtrl">
+    <div class="input-group">
+        <select class="form-control " ng-model="mode" ng-options="item.display for item in options track by item.value"></select>
+        <span class="input-group-btn">
+            <button ng-click="changeView()" class="btn btn-default">Apply!</button>
+        </span>
+    </div>
+    <ng-include src="url"></ng-include>
+
+</body>
+</html>

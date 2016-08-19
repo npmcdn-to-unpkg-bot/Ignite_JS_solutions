@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <title>Homework solution</title>
+    <!--
+        ###Задача 3
+        Реализуйте SPA приложение, в котором пользователю представляется пройти тест из 5 вопросов, в каждом вопросе по 4 варианта ответа. Вопросы должны выбираться с помощью radio-button и когда выбран, например, вопрос №1, то на странице должны появится варианты ответа только для этого вопроса. В конце тестирования отобразите результат теста. При решении данной задачи используйте директиву ng-switch.
+    -->
+    <script>
+
+        var app = angular.module('myApp', [])
+        .controller('mainCtrl', function ($scope) {
+
+            $scope.question = '1';
+            $scope.result = 0;
+
+            $scope.answer1 = 0;
+            $scope.answer2 = 0;
+            $scope.answer3 = 0;
+            $scope.answer4 = 0;
+            $scope.answer5 = 0;
+
+            $scope.selectVariant = function (ans) {
+              //alert(typeof($scope.question));
+
+              //alert($scope.answer);
+
+              if( ans == '4') $scope.result++ ;
+              //else if($scope.answer2 == '4') $scope.result++ ;
+            }
+
+
+            $scope.getResult = function () {
+
+              alert('Your result is ' + $scope.result);
+
+              $scope.result = 0;
+              
+            }
+
+        })
+
+    </script>
+</head>
+<body ng-controller="mainCtrl">
+<hr>
+    <form class="form-horizontal">
+    <fieldset>
+
+    <div class="form-group">
+      <label class="col-lg-1 control-label">Questions</label>
+
+
+
+          <div class="col-lg-6">
+            
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model='question'  value="1" >
+                Sun is a ... 
+              </label>
+            </div>
+
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model='question'  value="2" >
+                Select third planet from the Sun
+              </label>
+            </div>
+
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model='question'  value="3" >
+                Choose natural satellite of the Earth
+              </label>
+            </div>
+
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model='question'  value="4" >
+                The highest mountain in the world is ...
+              </label>
+            </div>
+
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model='question'  value="5" >
+                Choose the most hardest mineral
+              </label>
+            </div>
+
+          </div>
+
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+      <label for="select" class="col-lg-1 control-label">Answers</label>
+      
+      <div class="col-lg-6" ng-switch on="question">
+
+         <div class="form-group" ng-switch-when="1" ng-click='selectVariant($parent.answer1)'>
+            <input type="radio" ng-model='$parent.answer1'  value="1" > planet &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer1'  value="2" > comet &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer1'  value="3" > meteor &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer1'  value="4" > star &nbsp &nbsp &nbsp
+         </div>
+
+         <div class="form-group" ng-switch-when="2" ng-click='selectVariant($parent.answer2)'>
+            <input type="radio" ng-model='$parent.answer2'  value="4" > Earth &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer2'  value="3" > Venus &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer2'  value="2" > Mars &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer2'  value="1" > Mercury &nbsp &nbsp &nbsp
+         </div>
+
+         <div class="form-group" ng-switch-when="3" ng-click='selectVariant($parent.answer3)'>
+            <input type="radio" ng-model='$parent.answer3'  value="1" > Sun &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer3'  value="2" > Nix &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer3'  value="3" > Styx &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer3'  value="4" > Moon &nbsp &nbsp &nbsp
+         </div>
+
+         <div class="form-group" ng-switch-when="4" ng-click='selectVariant($parent.answer4)'>
+            <input type="radio" ng-model='$parent.answer4'  value="1" > Goverla &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer4'  value="4" > Everest &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer4'  value="3" > Zugspitze &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer4'  value="2" > Chimborazo &nbsp &nbsp &nbsp
+         </div>
+
+         <div class="form-group" ng-switch-when="5" ng-click='selectVariant($parent.answer5)'>
+            <input type="radio" ng-model='$parent.answer5'  value="1" > calcite &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer5'  value="2" > fluorite &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer5'  value="4" > diamond &nbsp &nbsp &nbsp
+            <input type="radio" ng-model='$parent.answer5'  value="3" > topaz &nbsp &nbsp &nbsp
+         </div>
+
+      </div>
+    </div>
+<hr>
+    <div class="form-group">
+      <div class="col-lg-6 col-lg-offset-1">
+        <button class="btn btn-primary" ng-click="getResult()">Finish test</button>
+      </div>
+    </div>
+
+    </fieldset>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <title>Homework solution</title>
+
+    <!--
+        ###Задача 1
+        Создайте приложение-калькулятор. В приложении должно быть два поля ввода и кнопки «+», «-», «*», «/». Реализуйте двунаправленную привязку таким образом, чтобы при нажатии на кнопки результат арифметических операций выводился на странице. 
+    -->
+    <script>
+
+        var app = angular.module('myApp', [])
+        .controller('mainCtrl', function ($scope) {
+
+            $scope.plusFunc = function () {
+                $scope.result = +$scope.val1 + +$scope.val2;
+            }
+
+            $scope.minusFunc = function () {
+                $scope.result = +$scope.val1 - +$scope.val2;
+            }
+
+            $scope.multiplyFunc = function () {
+                $scope.result = +$scope.val1 * +$scope.val2;
+            }
+
+            $scope.divideFunc = function () {
+                $scope.result = +$scope.val1 / +$scope.val2;
+            }
+
+        })
+
+    </script>
+</head>
+<body ng-controller="mainCtrl">
+
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Enter first value" ng-model='val1'>
+        </div>
+
+    <div class="input-group">
+
+            <button ng-click="plusFunc()" class="btn btn-default">+</button>
+        
+            <button ng-click="minusFunc()" class="btn btn-default">-</button>
+        
+            <button ng-click="multiplyFunc()" class="btn btn-default">*</button>
+        
+            <button ng-click="divideFunc()" class="btn btn-default">/</button>
+    </div><br>
+
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Enter second value" ng-model='val2'>
+        </div>
+
+    <h2>{{result}}</h2>
+
+</body>
+</html>
