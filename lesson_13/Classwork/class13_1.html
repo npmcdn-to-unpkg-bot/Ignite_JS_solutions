@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+
+    <title>Managing style</title>
+    <style>
+        .panel { padding-left: 30px;}
+        .yellow_text{ color: yellow; }
+        .green {background-color: limegreen;}
+        .test {
+            margin: 30px;
+            width: 200px;
+            height: 200px;
+            border: 1px solid blue;
+            border-radius: 20px;
+        }
+        .btn{margin: 30px;}
+    </style>
+    <script>
+    /*
+    ###Задача1 
+    Создайте страницу с элементом div и кнопкой. Реализуйте следующее:
+    При нажатии на кнопку элементу div присваиваются 2 CSS-класса 
+    */
+
+        var app = angular.module('myApp', [])
+        .controller('mainCtrl', function ($scope) {
+
+            $scope.addStyles = function(){
+                
+                $scope.className = 'green yellow_text';
+
+            }
+
+        })
+
+    </script>
+</head>
+<body>
+    <div class="panel panel-primary" ng-controller="mainCtrl" ng-cloak>
+
+        <div class="test" ng-class="className"><h2>HELLO!!!</h2></div>
+
+        <button class="btn" ng-click='addStyles()'>Add styles</button>
+
+    </div>
+</body>
+</html>

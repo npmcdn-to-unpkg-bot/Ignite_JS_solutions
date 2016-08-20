@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="SampleApp">
+<head>
+    <title>ng-show &amp; ng-hide</title>
+    <!--
+    ###Задача 2 
+    Создайте страницу с десятью тегами div с текстом, полем ввода и кнопкой. Добавьте фильтр, который при вводе значения в поле и после нажатия на кнопку, покажет пользователю только те блоки, текст в которых соответствуют введеному значению. Остальные блоки должны быть скрыты. 
+    -->
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap-theme.css" rel="stylesheet" />
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <script>
+        var app = angular.module("SampleApp", [])
+        .controller("SampleAppCtrl", function ($scope) {
+
+            //$scope.hide_val = false;
+
+            $scope.items = [
+                 { name: "yes", hide_val: false}, { name: "no", hide_val: false}, 
+                 { name: "maybe", hide_val: false}, { name: "yes", hide_val: false},
+                 { name: "no", hide_val: false}, { name: "maybe", hide_val: false},
+                 { name: "yes", hide_val: false}, { name: "no", hide_val: false},
+                 { name: "maybe", hide_val: false}, { name: "yes", hide_val: false}
+                 ];
+
+            $scope.filtElems = function(){
+                //alert(!$scope.filt);
+               for(item of $scope.items){
+                    if (!$scope.filt){
+                        item.hide_val = false;
+                    } 
+                    else if(item.name != $scope.filt){
+                        item.hide_val = true
+                    }
+                    else{
+                        item.hide_val = false
+                    }
+               }
+            }
+        })
+
+    </script>
+    <style>
+        div {
+            display: inline-block;
+            border-radius: 3px;
+            margin: 14px;
+            padding: 20px;
+        }
+
+        .yes {background-color: lightgreen;}
+
+        .maybe {background-color: yellow;}
+
+        .no {background-color: lightcoral;}
+    </style>
+</head>
+<body ng-controller="SampleAppCtrl">
+    
+    <div ng-repeat='item in items' ng-class='item.name' ng-hide='item.hide_val'>{{item.name}}</div>
+    <hr>
+    <div>
+        <input type="text" ng-model="filt" />
+        <hr>
+        <button class='btn' ng-click="filtElems()">Filter</button>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+
+    <title>Managing style</title>
+    <style>
+        .panel { padding: 30px;}
+        .green {background-color: limegreen;}
+        .yellow{background-color: yellow;}
+        .red{background-color: red;}
+        .test {
+            margin: 30px;
+            width: 200px;
+            height: 200px;
+            border: 1px solid blue;
+            border-radius: 20px;
+        }
+        .btn{margin: 30px;}
+    </style>
+    <script>
+    /*
+    ###Задача 1
+    Создайте три разных CSS класса, которые по-разному будут оформлять блок текста на странице. Реализуйте возможность выбирать стиль для оформления страницы с помощью кнопок или checkbox
+    */
+
+        var app = angular.module('myApp', [])
+        .controller('mainCtrl', function ($scope) {
+
+            $scope.addStyles = function(style){
+                
+                $scope.className = style;
+
+            }
+
+        })
+
+    </script>
+</head>
+<body>
+    <div class="panel panel-primary" ng-controller="mainCtrl" ng-cloak>
+
+        <h2 ng-class="className">HELLO!!!</h2>
+
+        <button class="btn" ng-click='addStyles("red")'>RED</button>
+        <button class="btn" ng-click='addStyles("green")'>GREEN</button>
+        <button class="btn" ng-click='addStyles("yellow")'>YELLOW</button>
+
+    </div>
+</body>
+</html>
