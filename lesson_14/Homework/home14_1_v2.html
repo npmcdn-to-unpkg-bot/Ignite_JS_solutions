@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <style>body{margin: 20px 100px;}</style>
+    <title>Homework solution</title>
+
+    <!--
+        ###Задача 1 
+    Создайте сервис, который предоставляет стандартные математические операции – сложение, умножение и т.д. Используйте три разных способа для создания сервиса.  
+    -->
+    <script>
+
+        var app = angular.module('myApp', [])
+        .controller('mainCtrl', ['$scope', 'calcExpr', function ($scope, calcExpr) {
+
+            $scope.plusFunc = function () {
+                 $scope.expr = $scope.val1 + '+' +$scope.val2;
+                 $scope.result = calcExpr($scope.expr);
+            }
+
+            $scope.minusFunc = function () {
+                $scope.expr = $scope.val1 + '-' +$scope.val2;
+                $scope.result = calcExpr($scope.expr);
+            }
+
+            $scope.multiplyFunc = function () {
+                $scope.expr = $scope.val1 + '*' +$scope.val2;
+                $scope.result = calcExpr($scope.expr);
+            }
+
+            $scope.divideFunc = function () {
+                $scope.expr = $scope.val1 + '/' +$scope.val2;
+                $scope.result = calcExpr($scope.expr);
+            }
+
+            }])
+
+            /*.factory('calcExpr', function () {
+                return function (expr) {
+                    return eval(expr);
+                };
+            })*/
+
+            .provider('calcExpr', function () {
+
+                return {
+
+                    $get: function () {
+                        return function (expr) {
+                            return eval(expr);
+                        };
+                    }
+                }
+            })
+
+    </script>
+</head>
+<body ng-controller="mainCtrl">
+
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Enter first value" ng-model='val1'>
+        </div>
+
+    <div class="input-group">
+
+            <button ng-click="plusFunc()" class="btn btn-default">+</button>
+        
+            <button ng-click="minusFunc()" class="btn btn-default">-</button>
+        
+            <button ng-click="multiplyFunc()" class="btn btn-default">*</button>
+        
+            <button ng-click="divideFunc()" class="btn btn-default">/</button>
+    </div><br>
+
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Enter second value" ng-model='val2'>
+        </div>
+
+    <h2>{{result}}</h2>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <link href="../Libraries/bootstrap-theme.css" rel="stylesheet" />
+
+    <title>Service $http</title> 
+
+    <!--
+        ###Задача 3
+    Используйте сервис $http для получения данных из файла data.json, который находится в папке data. Отобразите полученные данные на странице в виде таблицы. Предусмотрите обработку ошибок в запросе (используя Promise).
+    -->
+
+
+    <script>
+        var app = angular.module('myApp', [])
+        .controller('mainCtrl', function ($scope, $http) {
+
+            $scope.sendRequest1 = function () {
+                
+                var promise = $http.get("data/data.json");
+
+                promise.then(fulfilled, rejected);
+            }
+
+
+                function fulfilled(response) {
+
+                    console.log("Status: " + response.status); // status - статус код полученный от сервера
+                    console.log("Type: " + response.headers("content-type")); // headers - метод для чтения заголовков ответа
+                    console.log("Length: " + response.headers("content-length"));
+
+                    $scope.items = response.data; // data - данные запроса
+                }
+
+                function rejected(error) {
+                    alert('Error status: ' + error.status + '\n' + 'Error status text: '+ error.statusText);
+                    console.error(error.status);
+                    console.error(error.statusText);
+                }
+
+            /*$scope.sendRequest1 = function () {
+                // $http.get - выполняем HTTP GET запрос к указанному ресурсу.
+                $http.get("data/data.json").success(function (response) {
+                    $scope.items = response; 
+                })
+            }*/
+            
+        })
+
+    </script>
+
+</head>
+<body>
+    <div ng-controller="mainCtrl" class="panel panel-primary" > 
+        <div class="well">
+        
+        <input type="button" value="get items!" class="btn-lg btn-success"  ng-click="sendRequest1()"> 
+    
+        </div>
+
+        <table class="table">
+            
+            <tr ng-repeat="item in items">
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+            </tr>
+
+        </table>
+
+    </div>
+</body>
+</html>
