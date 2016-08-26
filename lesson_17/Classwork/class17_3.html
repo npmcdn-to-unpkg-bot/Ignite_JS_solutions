@@ -37,14 +37,14 @@
                 $scope.mailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]+$/; 
                 $scope.passRegex = /^\w/;
          })
-        .directive('myForm', function(){
+        .directive('myForm', function ($compile) {
             return function (scope, element, attributes) {
 
                     var fields = scope.items;
                     var form = angular.element('<form name="myForm"></form>');
 
                     for (i = 0; i < fields.length; i++) {
-                        var input = angular.element('<div class="form-group"><input class="input-lg form-control" type="' +fields[i].type+'" placeholder="'+fields[i].placeholder+'" ng-pattern="'+fields[i].pattern+'" ng-model="myForm.'+fields[i].name+'"></div>');
+                        var input = angular.element($compile('<div class="form-group"><input class="input-lg form-control" type="' +fields[i].type+'" placeholder="'+fields[i].placeholder+'" ng-pattern="'+fields[i].pattern+'" ng-model="myForm.'+fields[i].name+'"></div>')(scope));
 
                         form.append(input);
                     }
