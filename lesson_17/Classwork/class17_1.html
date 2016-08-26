@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <title>Directives</title>
+    <script>
+    /*
+    ###Задача 1 
+    Создайте пользовательскую директиву, которой можно передать массив, а результатом её работы будет сгенерированный список.
+    */
+
+        var app = angular.module('myApp', [])
+        .controller('mainCtrl', function ($scope) {
+             $scope.items = [ 'First', 'Second', 'Third', 'Fourth' ];
+         })
+        .directive('customUl', function(){
+
+                return function (scope, element, attributes) {
+
+                    var data = scope.items;
+                    var ul = angular.element('<ul id="myul"></ul>');
+
+                    for (i = 0; i < data.length; i++) {
+                        var li = angular.element('<li>').text(data[i]);
+                        ul.append(li);
+                    }
+                    element.append(ul);
+                }
+        } )
+
+    </script>
+</head>
+<body ng-controller='mainCtrl'>
+
+    <div class="container">
+        <div custom-ul='items'></div>
+    </div>
+    
+</body>
+</html>

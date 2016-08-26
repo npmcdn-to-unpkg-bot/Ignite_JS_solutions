@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <title>Directives</title>
+    <script>
+    /*
+    ###Задача 2 
+    Создайте директиву, которая создает форму и добавляет ее на страницу. В должны быть следующие поля: 
+    Username, login, password, email. 
+    */
+
+        var app = angular.module('myApp', [])
+        .controller('mainCtrl', function ($scope) {
+             $scope.items = [ 
+                { name: "Username", type: "text", placeholder: "Username" },
+                { name: "Login", type: "text", placeholder: "Login" },
+                { name: "Email", type: "text", placeholder: "Email" },
+                { name: "Password", type: "password", placeholder: "Password" }
+              ];
+         })
+        .directive('myForm', function(){
+            return function (scope, element, attributes) {
+
+                    var fields = scope.items;
+                    var form = angular.element('<form></form>');
+
+                    for (i = 0; i < fields.length; i++) {
+                        var input = angular.element('<div class="form-group"><input type="' +fields[i].type+'" placeholder="'+fields[i].placeholder+'"></div>');
+
+                        form.append(input);
+                    }
+                    element.append(form);
+                }
+        } )
+
+    </script>
+</head>
+<body ng-controller='mainCtrl'>
+
+    <div class="container">
+    <br>
+        <div my-form='items'></div>
+    </div>
+    
+</body>
+</html>
