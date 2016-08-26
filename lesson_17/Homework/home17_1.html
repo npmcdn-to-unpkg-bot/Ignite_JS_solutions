@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <title>Directives</title>
+    <style>
+        #my_tab td{
+            border: 1px solid;
+            padding: 5px;
+        }
+    </style>
+    <script>
+    /*
+    ###Задача 1 
+    Создайте пользовательскую директиву, которой можно передать массив объектов, а результатом её работы будет сгенерированная таблица. 
+    Столбцы таблицы, будут соответствовать свойствам объекта. Используйте подход с link function и генерацию элементов с помощью jqLite.
+    */
+
+    var app = angular.module('myApp', [])
+    .controller('mainCtrl', function ($scope) {
+            $scope.items = [ 
+                { name: "name", type: "text", placeholder: "Username", pattern: "/^.{3,20}$/" },
+                { name: "login", type: "text", placeholder: "Login", pattern: "nameRegex" },
+                { name: "email", type: "text", placeholder: "Email", pattern: "mailRegex" },
+                { name: "password", type: "password", placeholder: "Password", pattern: "passRegex" }
+              ];
+        })
+    .directive('itemTable', function () {
+
+            return {
+                link: function (scope, elem, attrs) {
+
+                    var data = scope.items;
+                    var container = angular.element('<table id="my_tab">');
+
+                    for (i = 0; i < data.length; i++) {
+
+                        var row = angular.element('<tr>');
+
+                        row.append(angular.element('<td>').text(data[i].name));
+                        row.append(angular.element('<td>').text(data[i].type));
+                        row.append(angular.element('<td>').text(data[i].placeholder));
+                        row.append(angular.element('<td>').text(data[i].pattern));
+
+                        container.append(row);
+                    }
+
+                    elem.append(container);
+                }
+            }
+        })
+    </script>
+</head>
+<body>
+    <div ng-controller="mainCtrl">
+        <div item-table="items" class="well"></div>
+    </div>
+</body>
+</html>
+        

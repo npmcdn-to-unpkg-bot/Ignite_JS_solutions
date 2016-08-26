@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <title>Directives</title>
+    <style>
+        #my_ul li{
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>
+    <script>
+    /*
+    ###Задача 3 
+    Создайте директиву для генерации меню. 
+    В качестве источника данных директива должна использовать массив объектов, одно из свойств объекта должено содержать текст элемента меню, второе свойство должно использоватся для определения адреса перехода при клике по элементу меню. 
+    */
+
+    var app = angular.module('myApp', [])
+    .controller('mainCtrl', function ($scope) {
+            $scope.items = [ 
+                { text: "HOME", anch: "home"},
+                { text: "ABOUT", anch: "about"},
+                { text: "CONTACTS", anch: "contacts"}
+              ];
+        })
+    .directive('myMenu', function () {
+
+            return {
+                link: function (scope, elem, attrs) {
+
+                    var data = scope.items;
+                    var container = angular.element('<ul id="my_ul">');
+
+                    for (i = 0; i < data.length; i++) {
+
+                        var li = angular.element('<li><a href="#'+data[i].anch+'">'+data[i].text+'</a></li>');
+
+                        container.append(li);
+                    }
+
+                    elem.append(container);
+                }
+            }
+        })
+    </script>
+</head>
+<body>
+    <div ng-controller="mainCtrl">
+        <div my-menu="items" class="well"></div>
+    </div>
+</body>
+</html>
+        
