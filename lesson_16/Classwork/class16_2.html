@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <script src="../Libraries/angular_route.js"></script> 
+
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+
+    <title>Routing</title>
+    <script>
+    /*
+    ###Задача 2 
+    Добавьте в код предыдущей задачи путь, который будет использоваться по умолчанию и поддержку режима html5Mode
+
+    */
+        var app = angular.module('myApp', ['ngRoute'])
+        .config(function ($routeProvider, $locationProvider) {
+
+            $routeProvider
+                .when('/', {
+                     templateUrl: 'lesson_16/Classwork/Task/view1.html',
+                })
+                .when('/view1', {
+                     templateUrl: 'lesson_16/Classwork/Task/view1.html',
+                })
+                .when('/view2', {
+                     templateUrl: 'lesson_16/Classwork/Task/view2.html'
+                })
+                .otherwise({
+                redirectTo: '/'
+                })
+
+                //$locationProvider.html5Mode(true);
+                $locationProvider.html5Mode({
+                  enabled: true,
+                  requireBase: false
+                });
+        })
+        .controller('mainCtrl', function ($scope, $location) {
+            $scope.goToView1 = function () {
+                $location.path('/view1')
+            }
+            $scope.goToView2 = function () {
+                $location.path('/view2')
+            }
+        })
+    </script>
+</head>
+<body>
+    <div class="panel panel-primary well" ng-controller="mainCtrl">
+        <ul class="nav nav-tabs">
+            <li><a ng-click="goToView1()">View 1</a></li> 
+            <li><a ng-click="goToView2()">View 2</a></li>
+        </ul>
+    </div>
+    <div class="panel" ng-view></div>
+</body>
+</html>

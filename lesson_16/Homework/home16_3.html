@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <script src="../Libraries/angular_route.js"></script> 
+
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+
+    <title>Routing</title>
+    <script>
+    /*
+    ###Задача 3
+    Добавьте на страницу следующий функционал: 
+    * При клике по элементу списка на странице home, пользователь перенаправляется на страницу contact по адресу ‘/contact + routeParams’, где routeParams – параметры маршрутизации, созданные с помощью сервиса $routeParams, представляющие собой значения свойств массива people для элемента, по которому кликнул пользователь. 
+    * Используйте данные, переданные через $routeParams, для автозаполнения формы на странице contact 
+    */
+        var app = angular.module('myApp', ['ngRoute'])
+        .config(function ($routeProvider, $locationProvider) {
+
+            $routeProvider
+
+                .when('/', {
+                    templateUrl: 'lesson_16/Homework/Task/home2.html'
+                }) 
+                     //передача параметров через адресную строку
+                .when('/contact/:name/:age/:email/:employed', {
+               
+                    templateUrl: 'lesson_16/Homework/Task/contact.html', 
+                    controller: 'ContactCtrl'
+                })
+                .when('/contact', {
+                     templateUrl: 'lesson_16/Homework/Task/contact.html'
+                })
+                .otherwise({
+                    redirectTo: '/'
+                })
+
+                //$locationProvider.html5Mode(true);
+                $locationProvider.html5Mode({
+                  enabled: true,
+                  requireBase: false
+                });
+        })
+        .controller('mainCtrl', function ($scope, $location) {
+            $scope.goToView1 = function () {
+                $location.path('/home')
+            }
+            $scope.goToView2 = function () {
+                $location.path('/contact')
+            }
+
+            $scope.people = [
+                {name: 'Vasya', age: 20, email: 'vasya@mail.ru', employed: false}, 
+                {name: 'Masha', age: 25, email: 'm@m', employed: true}, 
+                {name: 'Petya', age: 27, email: 'petya@stuff', employed: true}, 
+                {name: 'John', age: 36, email: 'johnDoe@mail', employed: true},
+                {name: 'Jane', age: 28, email: 'janeDoe@mail', employed: false}
+                ]
+
+            $scope.getDate = function (i) {
+
+                //задать параметры 
+                var params = $scope.people[i].name+'/'+$scope.people[i].age+'/'+$scope.people[i].email+'/'+$scope.people[i].employed;
+                console.log(params);
+                //передать параметры в адресную строку 
+                $location.path('/contact/' + params); 
+
+            }
+
+                })
+        .controller('ContactCtrl', function ($scope, $routeParams) {
+            $scope.name = $routeParams.name;
+            $scope.age = $routeParams.age;
+            $scope.email = $routeParams.email;
+            $scope.employed = ($routeParams.employed === "true");
+            //alert($scope.employed);
+        })
+    </script>
+</head>
+<body>
+    <div ng-controller="mainCtrl">
+        <div class="panel panel-primary well">
+            <ul class="nav nav-tabs">
+                <li><a ng-click="goToView1()">Home</a></li> 
+                <li><a ng-click="goToView2()">Contact</a></li>
+            </ul>
+        </div>
+        <div class="panel" ng-view></div>
+    </div>
+</body>
+</html>
