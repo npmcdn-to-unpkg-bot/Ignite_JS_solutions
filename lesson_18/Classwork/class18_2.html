@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <title>Directives</title>
+    <script>
+    /*
+    ### Задача 2
+    Добавьте в код предыдущей задачи еще одну директиву, которая будет выводить значение переменной счетчика в консоль. Организуйте код так, чтобы обе директивы использовали один и тот же контроллер. Используйте свойство require.  
+    */
+        var app = angular.module('myApp', [])
+            //создание директивы
+        .directive('firstDir', function () {
+            return {
+                restrict: 'E',
+                scope: true,
+
+                template: '<input type="button" class="btn-lg btn-success" ng-click="startCounter()" value="Start counter"><h1>{{counter}}</h1>',
+
+                controller: function ($scope, $interval) {
+
+                $scope.counter = 0;
+                var interval;
+
+                this.a = 0;
+                
+
+                $scope.startCounter = function () {
+                    interval = $interval(function () {
+                        $scope.counter++;
+                        a = console.log($scope.counter);
+                    }, 1000)
+                }
+
+                //this.logger = function(){
+                   // console.log(a);
+                   // }
+                
+              }
+
+            }
+
+        })
+
+        .directive('secondDir', function () {
+            return {
+                restrict: 'A',
+                //указываем, что для работы данной директивы необходимо использовать контроллер директивы firstDir
+                require: 'firstDir',
+                //передаем link function в качестве 4 агрумента контроллер первой директивы
+                link: function (scope, elem, attrs, firstDirCtrl) {
+                    //firstDirCtrl.logger();
+                    console.log(firstDirCtrl.a);
+                }
+            }
+
+        })
+
+    </script>
+</head>
+<body>
+    <div class="panel well">
+        <first-dir second-dir></first-dir>
+    </div>
+</body>
+</html>

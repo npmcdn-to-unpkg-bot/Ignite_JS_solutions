@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <title>Directives</title>
+    <!--
+    ###Задача 3 
+    Имеется html-разметка: 
+    ```
+    <div custom-directive>’myButton’</div>
+    ``` 
+    Создайте директиву, результатом работы которой станет кнопка с текстом 'myButton'. Используйте свойство transclude. 
+    -->
+    <script>
+
+        var app = angular.module('myApp', [])
+
+        .directive('customDirective', function () {
+            return {
+                restrict: 'A',
+                //использовать трансклюзию
+                transclude: true,
+                //директива ngTransclude
+                template: '<button class="btn"><span ng-transclude></span></button>'
+            }
+        })
+
+    </script>
+</head>
+<body>
+    <div class="panel well">
+        <div custom-directive>'myButton'</div>
+    </div>
+</body>
+</html>

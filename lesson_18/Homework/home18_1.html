@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <title>Directives</title>
+    <style>
+        #my_ul li{
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+    /*
+    ###Задача 1 
+    Есть массив items: 
+    ```
+    [
+                    { name: "Table", price: 44.10 },
+                    { name: "Chair", price: 21.20 },
+                    { name: "Pillow", price: 12.20 },
+                    { name: "Picture", price: 112.70 },
+                    { name: "Lamp", price: 28.31 }
+                ]; 
+    ```
+    Создайте две директивы. Первая создает панель меню с элементами, взятыми из свойства name массива items. Вторая директива реализует следующее: 
+    * при клике по элементу на панели меню, пользователю показывается соответственный контент, взятый из свойства price массива items. 
+    Директивы используют общий контроллер.
+    */
+
+    var app = angular.module('myApp', [])
+    .controller('mainCtrl', function ($scope) {
+            $scope.items = [ 
+                { name: "Table", price: 44.10 },
+                { name: "Chair", price: 21.20 },
+                { name: "Pillow", price: 12.20 },
+                { name: "Picture", price: 112.70 },
+                { name: "Lamp", price: 28.31 }
+              ];
+            
+            $scope.cont = $scope.items[0].price;
+
+            $scope.changeCont = function(i){
+                $scope.cont = $scope.items[i].price;
+            }
+        })
+
+    .directive('myMenu', function ($compile) {
+
+            return {
+                link: function (scope, elem, attrs) {
+
+                    var data = scope.items;
+                    var container = angular.element('<ul id="my_ul">');
+
+                    for (i = 0; i < data.length; i++) {
+
+                        var li = angular.element($compile('<li ng-click="changeCont('+i+')"><a>'+data[i].name+'</a></li>')(scope));
+
+                        container.append(li);
+                    }
+
+                    elem.append(container);
+                }
+            }
+        })
+
+    .directive('myCont', function () {
+
+            return {
+                template: '<h2>{{cont}}</h2>'
+            }
+        })
+    </script>
+</head>
+<body>
+    <div ng-controller="mainCtrl">
+        <div my-menu="items" class="well"></div>
+        <div my-cont="items" class="well"></div>
+    </div>
+</body>
+</html>
+        

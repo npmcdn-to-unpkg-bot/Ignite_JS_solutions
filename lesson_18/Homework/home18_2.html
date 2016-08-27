@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <title>Directives</title>
+    <style>
+        .red {
+            color: red
+        }
+    </style>
+    <!--
+    ###Задача 2 
+    Создайте две директивы. Первая создает список ul с произвольным количеством элементов. Вторая директива добавляет четным элементам списка CSS класс ‘red’ со следующим значением: 
+    ```
+    .red {
+    color: red
+    }
+    ```
+    -->
+    <script>
+
+        var app = angular.module('myApp', [])
+        .controller('mainCtrl', function ($scope) {
+            //$scope.output = '';
+            $scope.items = [ 'First', 'Second', 'Third', 'Fourth', 'Fifth' ];
+        })
+        .directive('firstDir', function () {
+            return {
+                restrict: 'A',
+                //указание приоритета директивы
+                priority: 2,
+                compile: function () {
+                    return {
+                        pre: function (scope, elem, attrs) {
+                            
+                            var data = scope.items;
+                            var ul = angular.element('<ul id="myul"></ul>');
+
+                            for (i = 0; i < data.length; i++) {
+                                var li = angular.element('<li>').text(data[i]);
+                                ul.append(li);
+                            }
+                            elem.append(ul);
+                            alert('directive 1');
+                        }
+                    }
+                }
+            }
+        })
+
+        .directive('secondDir', function () {
+            return {
+                restrict: 'A',
+                //указание приоритета директивы
+                priority: 1,
+                compile: function () {
+                    return {
+                        pre: function (scope, elem, attrs) {
+                            //var all_li = document.querySelectorAll('li');
+                            //var all_li = elem.find('li').addClass( "red" );
+
+                            var all_li = angular.element(document).find('li');
+                            //console.log(all_li);
+                            
+                            for (var i = 0; i < all_li.length; i++) {
+                                if ( (i+1)%2 == 0 ) angular.element(all_li[i]).addClass( "red" );
+                            }
+                            
+                            alert('directive 2');
+                        }
+                    }
+                }
+
+            }
+        })
+
+    </script>
+</head>
+<body>
+    <div class="panel well" ng-controller="mainCtrl">
+        <div first-dir second-dir></div>
+    </div>
+</body>
+</html>

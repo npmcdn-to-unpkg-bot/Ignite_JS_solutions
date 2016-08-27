@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <title>Directives</title>
+    <!--
+    ###Задача 3 
+    Создайте директиву dialogBox, которая будет выводить на экран в диалоговом окне содержимое элемента, к которому привязана директива.  
+    -->
+    <script>
+
+        var app = angular.module('myApp', [])
+
+        .directive('dialogBox', function () {
+            return function (scope, element, attributes) {
+                alert(element.text());
+            }
+        })
+
+    </script>
+</head>
+<body>
+        <span dialog-box>Hello!!!</span>
+</body>
+</html>
