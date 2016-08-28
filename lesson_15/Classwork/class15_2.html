@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+<head>
+    <title>$interval & $timeout services</title>
+
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap-theme.css" rel="stylesheet" />
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+
+    <script>
+    /*
+    ###Задача 2 
+    Создайте страницу с двумя кнопками Start и Stop. Реализуйте следующее: 
+    * при нажатии на кнопку start, на страницу начинают выводиться чила в возрастающем порядке с интервалом 1 с. 
+    * При нажатии на кнопку stop вывод чисел останавливается. 
+    * При нажатии на кнопку start отсчет начинается всегда с 0.
+    */
+        // $interval и $timeout сервисы-обертки над функциями window.setInterval() и window.setTimeout()
+        angular.module("myApp", [])
+        .controller("mainCtrl", function ($scope, $interval, $window) {
+
+
+            $scope.tick = 0;
+            var interval;
+            $scope.tickTak = function () {
+                $scope.tick = 0;
+                interval = $interval(function () {
+                    $scope.tick++;
+                }, 1000);
+            }
+
+            $scope.tickStop = function () {
+                $interval.cancel(interval);
+            }
+        })
+    </script>
+</head>
+<body ng-controller="mainCtrl" class="well">
+    <div class="container-fluid">
+        <button class='btn' ng-click="tickTak()">Start</button>
+        <button class='btn' ng-click="tickStop()">Stop</button>
+        <hr>
+        <h2>{{tick}}</h2>
+    </div>
+</body>
+</html>

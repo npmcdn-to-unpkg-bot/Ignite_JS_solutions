@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+<head>
+    <title>$interval & $timeout services</title>
+
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap-theme.css" rel="stylesheet" />
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+
+    <script>
+    /*
+    ###Задача 2 
+    Разработайте приложение-секундомер. На странице должно быть 3 кнопки: 
+    * start – начать отсчет 
+    * stop – остановить отсчет 
+    * clear – сброс отсчета
+    */
+        // $interval и $timeout сервисы-обертки над функциями window.setInterval() и window.setTimeout()
+        angular.module("myApp", [])
+        .controller("mainCtrl", function ($scope, $interval, $window) {
+
+
+            $scope.min = 0;
+            $scope.sec = 0;
+            $scope.mil_sec = 0;
+
+            var interval;
+
+            $scope.tickTak = function () {
+                //$scope.tick = 0;
+                interval = $interval(function () {
+                    if($scope.mil_sec == 990){
+                        $scope.mil_sec = 0
+                        if($scope.sec == 59){
+                            $scope.sec = 0;
+                            $scope.min++;
+                        }
+                        else{
+                            $scope.sec++;
+                        }
+                    }
+                    else{
+                        $scope.mil_sec+=10 ;
+                    }
+
+                }, 10);
+            }
+
+            $scope.tickStop = function () {
+                $interval.cancel(interval);
+            }
+
+            $scope.tickClear = function () {
+                $scope.min = 0;
+                $scope.sec = 0;
+                $scope.mil_sec = 0;
+            }
+        })
+    </script>
+</head>
+<body ng-controller="mainCtrl" class="well">
+    <div class="container-fluid">
+        <button class='btn' ng-click="tickTak()">Start</button>
+        <button class='btn' ng-click="tickStop()">Stop</button>
+        <button class='btn' ng-click="tickClear()">Clear</button>
+        <hr>
+        <h2>{{min}}:{{sec}}:{{mil_sec/10}}</h2>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-cookies.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+
+    <title>$cookieStore</title>
+    <script>
+    /*
+    ###Задача 3 
+    Разработайте сервис, которой можно будет использовать для записи данных в cookie. Продемонстрируйте работу сервиса.
+    */
+        var app = angular.module('myApp', ['ngCookies'])
+        .controller('mainCtrl', ['$scope', '$cookies', 'cookieService', function ($scope, $cookies, cookieService) {
+
+            $scope.cookieId = '';
+            $scope.cookieVal = '';
+            $scope.output = []; 
+
+            //Put cookie
+            $scope.makeCookie = function () {
+                $scope.output = cookieService($scope.cookieId, $scope.cookieVal, $scope.output);
+            }
+           
+        }])
+        .factory('cookieService', function ($cookies) {
+
+                // factory - метод для создания сервисов. В качестве параметров принимает имя сервиса и фабричную функцию для его создания.
+                // Экземпляр, создаваемый фабричной функцией, будет одним на все приложение (singleton).
+                
+                /*var clickCounter = 1;
+                return function (msg) {
+                    var output = msg + clickCounter++;
+                    return output;
+                };*/
+                var myCookie = 'cookies on this site: ';
+                return function (cookieId, cookieVal, output) {
+                    var now = new Date(),
+                    exp = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
+
+                    $cookies.put(cookieId, cookieVal, { expires: exp });
+               
+                    //Get cookie 
+                    var myCookie = $cookies.get(cookieId);
+                    output.push({val: myCookie, id: cookieId});
+                    return output;
+
+                };
+            })
+
+
+    </script>
+</head>
+<body>
+    <div class="panel panel-primary" ng-controller="mainCtrl">
+        <label>cooke ID: <input class="input-lg" ng-model="cookieId"></label><br />
+        <label>cooke Value: <input class="input-lg" ng-model="cookieVal"></label><br />
+
+        <input type="button" class="btn-lg btn-success" value="Create Cookie" ng-click="makeCookie()">
+
+        <h2 ng-repeat="item in output">val: &nbsp; {{item.val}}  &nbsp; id: {{item.id}}</h2>
+    </div>
+</body>
+</html>
