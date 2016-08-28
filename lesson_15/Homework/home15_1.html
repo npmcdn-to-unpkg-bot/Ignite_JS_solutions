@@ -1,0 +1,110 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="CacheServiceApp" lang="en"> 
+<head> 
+<title>Cacher</title> 
+<script src="../Libraries/angular.js"></script> 
+<link href="../Libraries/bootstrap.css" rel="stylesheet" /> 
+<link href="../Libraries/bootstrap-theme.css" rel="stylesheet" /> 
+<meta charset="utf-8"> 
+<script> 
+	/*
+    ###Задача 1 
+    Разработайте сервис, которой можно будет использовать для кэширования данных. В кэш можно поместить запись и установить время удаления этой записи. Продемонстрируйте работу сервиса.
+    */
+
+	var module=angular.module("CacheServiceApp",[]) 
+
+	.controller("CacheServiceCtrl",['$scope', 'CacheService','$cacheFactory', '$timeout',function($scope, CacheService, $cacheFactory, $timeout){ 
+	$scope.CacheId=""; 
+	$scope.newCacheKey=""; 
+	$scope.newCacheValue=""; 
+
+	$scope.addCache = function() {
+		CacheService.setCache($scope.newCacheKey, $scope.newCacheValue, $scope.timeToDel); 
+	} 
+	$scope.getCache=function(){ 
+		$scope.CacheById=CacheService.getCache($scope.CacheId); 
+	} 
+	$scope.getAllCache=function(){ 
+		$scope.allCaches=CacheService.getAllCache(); 
+	} 
+
+	}]) 
+
+	.factory('CacheService',function($cacheFactory, $timeout){ 
+		keys = []; 
+		cache = $cacheFactory('cacheId'); 
+		return { 
+
+			setCache : function(key, value, delay){ 
+				if (angular.isUndefined(cache.get(key))) { 
+					keys.push(key); 
+				} 
+
+				cache.put(key, angular.isUndefined(value) ? null : value); 
+				console.log(cache.get(key)); 
+
+				var timer = $timeout(function(){
+					cache.remove(key);
+
+					var index = keys.indexOf(key);
+					keys.splice(index, 1);
+					alert('Cache with id '+key+' has been removed! \nClick getCache or getAllCache to insure in this.');
+
+				}, delay*1000);
+
+			}, 
+
+			getCache: function(key){ 
+				if(!angular.isUndefined(cache.get(key))) 
+					return{key:key, value:cache.get(key)} 
+				else return {key:undefined, value:undefined}; 
+			}, 
+
+			getAllCache:function(){ 
+				obj=[]; 
+				for(var i=0; i<keys.length; i++){ 
+					obj.push({key:keys[i], value:cache.get(keys[i])}); 
+				} 
+				return obj; 
+			}
+		} 
+	}) 
+</script> 
+
+</head> 
+<body> 
+
+	<div ng-controller="CacheServiceCtrl" class="container-fluid"> 
+
+		<label>AddCache</label> 
+		<input ng-model="newCacheKey" placeholder="Key"> 
+		<input ng-model="newCacheValue" placeholder="Value">
+		<input ng-model="timeToDel" placeholder="Time to delete in seconds"> 
+		<button class="btn" ng-click="addCache()">Cache</button> 
+		
+		<br> 
+		<label>GetCacheById</label> 
+		<input ng-model="CacheId" placeholder="Key"> 
+		<button class="btn" ng-click="getCache()">getCache</button> 
+
+		<div ng-repeat="(key, value) in CacheById"> 
+			<span ng-bind="key"></span> 
+			<span>: </span> 
+			<b ng-bind="value"></b> 
+		</div> 
+
+		<br> 
+		<label>GetAllCache</label> 
+		<button class="btn" ng-click="getAllCache()">getAllCache</button> 
+		<div ng-repeat="item in allCaches"> 
+			<div ng-repeat="(key, value) in item"> 
+				<span ng-bind="key"></span> 
+				<span>: </span> 
+				<b ng-bind="value"></b> 
+			</div> 
+		</div> 
+
+	</div> 
+</body> 
+</html>
