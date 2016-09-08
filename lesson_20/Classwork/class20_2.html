@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+
+    <!--
+    ###Задача 2
+    Создайте React компонент, который имеет два свойства(props) типа number
+    и свойство mode типа boolean.
+
+    В зависимости от значения свойства mode(true/false) компонент должен выводить на экран
+    либо сумму свойств типа number, либо результат их конкатенации.
+
+    -->
+
+</head>
+<body>
+
+<div id="example"></div>
+
+<script type="text/babel">
+
+    var Child = React.createClass({
+        render: function() {
+            return (
+                    <h2>RESULT IS {this.props.mode ? this.props.a + this.props.b : this.props.a +''+ this.props.b}</h2>
+            )}
+    })
+
+    var container = document.getElementById('example');
+
+    ReactDOM.render(<Child a={3} b={2} mode={false} />, container);
+
+</script>
+
+
+</body>
+
+</html>

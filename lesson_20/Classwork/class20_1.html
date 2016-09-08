@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+
+    <!--
+    ###Задача 1
+    Создайте React компонент Parent, отображающий на странице произвольный текст в теге h1. Создайте дочерний компонент Child, отображающий произвольный текст в теге h3.
+    -->
+
+</head>
+<body>
+
+<div id="example"></div>
+
+<script type="text/babel">
+
+    var Parent = React.createClass({
+        render: function() {
+            return (
+                    <div>
+                        <h1>HI FROM PARENT</h1>
+                        {/*this.props.children - доступ ко вложенным элементам компонента. Это могут быть теги, текстовые узлы и React компоненты */}
+                        {this.props.children}
+                    </div>
+            )}
+    })
+
+    var Child = React.createClass({
+        render: function() {
+            return (
+                        <h3>HI FROM CHILD</h3>
+            )}
+    })
+
+    var container = document.getElementById('example');
+
+    ReactDOM.render(
+                <Parent><Child/></Parent>
+            , container);
+
+</script>
+
+
+</body>
+
+</html>

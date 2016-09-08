@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+
+    <style>
+        .green_div{
+            height: 50px;
+            background-color: #2b542c;
+        }
+        .yellow_div{
+            height: 50px;
+            background-color: gold;
+        }
+    </style>
+
+    <!--
+    ### Задача 3
+    Создайте React компонент, который содержит checkbox и элемент div.
+    При клике по checkbox элементу div присваиваиваются новые стили(выбор стиля призвольный).
+
+    -->
+
+</head>
+<body>
+
+<div id="example"></div>
+
+<script type="text/babel">
+
+    var CheckBox = React.createClass({
+
+        // функция getInitialState позволяет указать состояние(state) элемента - его динамические свойства,
+        // которые, в отличие от props, могут быть изменены непосредственно
+        getInitialState: function() {
+            return {
+                checked: true
+            }
+        },
+
+        handler: function() {
+            // функция setState позволяет менять значение state
+            this.setState({checked: !this.state.checked})
+        },
+
+        render: function() {
+            var cls;
+
+            if ( this.state.checked ) {
+                cls = 'green_div';
+            }
+            else {
+                cls = 'yellow_div';
+            }
+
+            return (
+                    <div>
+                        <input type="checkbox" onChange={this.handler} defaultChecked ={this.state.checked}/>
+                        <div className={cls}>{cls}</div>
+                    </div>
+            )}
+
+    })
+
+    var container = document.getElementById('example');
+
+    ReactDOM.render(<CheckBox/>, container);
+
+</script>
+
+
+</body>
+
+</html>
