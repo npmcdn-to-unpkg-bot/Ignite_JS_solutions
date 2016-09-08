@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+
+    <!--
+    ### Задача 2
+    Создайте React компонент, который отображает на странице форму с полями ‘name’ , ‘login’ и кнопкой Submit
+    ```
+    -->
+
+</head>
+<body>
+
+<div id="example"></div>
+
+<script type="text/babel">
+
+    // Композиция(composition) - создаие компонента, состоящего из нескольких других компонентов
+
+    //форма
+    var Form = React.createClass({
+        getDefaultProps: function() {
+            return {
+                text1: 'Your name',
+                text2: 'Your login',
+                text3: 'Submit'
+            }
+        },
+
+        render: function() {
+
+            return (
+                    <div className="panel well">
+                        <form action="#" name="myForm">
+                            {/* отображение дочерних React компонентов */}
+                            <InputField1 prop1={this.props.text1}/>
+                            <InputField2 prop2={this.props.text1}/>
+                            <Button prop3={this.props.text3}/>
+                        </form>
+                    </div>
+            )}
+    });
+
+    // поле ввода
+    var InputField1 = React.createClass({
+
+        render: function() {
+            return (
+                    <div> <label>Name Field <br /> <input className="input-lg" placeholder={this.props.prop1}/></label><br/> </div>
+            )}
+    });
+
+    // поле ввода
+    var InputField2 = React.createClass({
+
+        render: function() {
+            return (
+                    <div> <label>Login Field <br /> <input className="input-lg" placeholder={this.props.prop2}/></label><br/> </div>
+            )}
+    });
+
+    // кнопка
+    var Button = React.createClass({
+
+        render: function() {
+            return (
+                    <input type="submit" className="btn-lg btn-success" value={this.props.prop3}/>
+            )}
+    });
+
+    var container = document.getElementById('example');
+
+    ReactDOM.render(<Form/>, container);
+
+</script>
+
+
+</body>
+
+</html>

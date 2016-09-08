@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <style>
+        td{
+            border: 1px solid;
+        }
+    </style>
+
+    <!--
+    ### Задача 1
+    Создайте React компонент, который выведет на экран массив users в виде таблицы.
+    Массив users для задачи:
+    ```
+    var users = [{name:"Anne Montgomery",gender:"Female"},
+    {name:"Annie George",gender:"Female"},
+    {name:"Gary Butler",gender:"Male"},
+    {name:"Lisa Mendoza",gender:"Female"},
+    {name:"Marilyn Henry",gender:"Female"},
+    {name:"Johnny Tucker",gender:"Male"},
+    {name:"Chris Jacobs",gender:"Male"},
+    {name:"Benjamin James",gender:"Male"}]
+    ```
+    -->
+
+</head>
+<body>
+
+<div id="example"></div>
+
+<script type="text/babel">
+    var users = [{name:"Anne Montgomery",gender:"Female"},
+        {name:"Annie George",gender:"Female"},
+        {name:"Gary Butler",gender:"Male"},
+        {name:"Lisa Mendoza",gender:"Female"},
+        {name:"Marilyn Henry",gender:"Female"},
+        {name:"Johnny Tucker",gender:"Male"},
+        {name:"Chris Jacobs",gender:"Male"},
+        {name:"Benjamin James",gender:"Male"}]
+
+    var ResultList = React.createClass({
+
+        getDefaultProps: function() {
+            return {
+                users
+            }
+        },
+
+        render: function() {
+            // создание дочерних React компонентов на основе значения props
+            return (
+                    <table>
+                        {this.props.users.map(function(user) {
+                            return <ResultItem name={user.name} gender={user.gender}>1</ResultItem>
+                        })}
+                    </table>
+            )}
+    });
+
+    var ResultItem = React.createClass({
+        render: function() {
+            return (
+                    <tr>
+                        <td>{this.props.name}</td>
+                        <td>{this.props.gender}</td>
+                    </tr>
+            )}
+    });
+
+    var container = document.getElementById('example');
+    ReactDOM.render(<ResultList><ResultItem/></ResultList>, container);
+
+</script>
+
+
+</body>
+
+</html>
